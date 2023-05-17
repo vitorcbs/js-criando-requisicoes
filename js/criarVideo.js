@@ -8,10 +8,15 @@ async function criarVideo(evento) {
   const titulo = document.querySelector("[data-titulo]").value;
   const url = document.querySelector("[data-url]").value;
   const descricao = Math.floor(Math.random() * 10).toString(); //gera um numero aleatorio
+  try {
+    await conectaAPI.criaVideo(titulo, descricao, url, imagem); //tem que seguir a ordem implementada no criaVideo() do conectaAPI.js
+    window.location.href = "../pages/envio-concluido.html";
+  } catch(error) {
+    alert(error)
+  }
 
-  await conectaAPI.criaVideo(titulo, descricao, url, imagem); //tem que seguir a ordem implementada no criaVideo() do conectaAPI.js
 
-  window.location.href = "../pages/envio-concluido.html";
+
 }
 
 formulario.addEventListener("submit", (evento) => criarVideo(evento));
